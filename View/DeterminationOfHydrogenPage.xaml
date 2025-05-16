@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BasicCalculator.DeterminationOfHydrogenPage"
+             xmlns:viewmodel="clr-namespace:BasicCalculator.ViewModel"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Title="Determination of Hydrogen Content in Dry Wood Chips">
+
+    <ContentPage.Resources>
+        <Style x:Key="InvalidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="DarkRed" />
+        </Style>
+        <Style x:Key="ValidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="DarkGreen" />
+        </Style>
+    </ContentPage.Resources>
+
+    <VerticalStackLayout>
+        <VerticalStackLayout Margin="0,60,0,20" WidthRequest="320">
+            <Label 
+                Text="Hydrogen Content in Dry, Ash-Free Wood Chips"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Hydrogen Content in Dry, Ash-Free Wood Chips, %; no LVS EN ISO 18125"
+                SemanticProperties.Hint="Hydrogen Content in Dry, Ash-Free Wood Chips, %; no LVS EN ISO 18125"
+                HorizontalOptions="Start"/>
+                <Entry 
+                    x:Name="HydrogenContentOfDryAshlessWoodChips"
+                    Text="{Binding HydrogenContentValue}"
+                    Keyboard="Numeric"
+                    HorizontalOptions="FillAndExpand">
+                    <Entry.Behaviors>
+                        <toolkit:NumericValidationBehavior 
+                            InvalidStyle="{StaticResource InvalidEntryStyle}"
+                            ValidStyle="{StaticResource ValidEntryStyle}"
+                            Flags="ValidateOnValueChanged"
+                            MinimumValue="0.1"
+                            MaximumValue="100"
+                            MaximumDecimalPlaces="4" />
+                    </Entry.Behaviors>
+                </Entry>
+            <Picker x:Name="WoodType" Title="Type of Wood" Margin="0,10,0,0" SelectedIndex="{Binding SelectedHydrogenValue}">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Unknown Type of Wood</x:String>
+                        <x:String>Tree trunk without bark, needles, and leaves</x:String>
+                        <x:String>Whole tree</x:String>
+                        <x:String>Logging residues</x:String>
+                        <x:String>Bark</x:String>
+                        <x:String>Understory wood</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Margin="0,20,0,20" WidthRequest="320">
+            <Label 
+                Text="Ash content in dry wood chips"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Ash content in dry wood chips, %; determined according to ar MK-20-4"
+                SemanticProperties.Hint="Ash content in dry wood chips, %; determined according to MK-20-4"
+                HorizontalOptions="Start"/>
+            <Entry 
+                x:Name="AshContentInDryWoodChips"
+                Text="{Binding AshContentValue}"
+                Keyboard="Numeric"
+                HorizontalOptions="FillAndExpand">
+                <Entry.Behaviors>
+                    <toolkit:NumericValidationBehavior 
+                        InvalidStyle="{StaticResource InvalidEntryStyle}"
+                        ValidStyle="{StaticResource ValidEntryStyle}"
+                        Flags="ValidateOnValueChanged"
+                        MinimumValue="0.1"
+                        MaximumValue="100"
+                        MaximumDecimalPlaces="4" />
+                </Entry.Behaviors>
+            </Entry>
+        </VerticalStackLayout>
+
+        <HorizontalStackLayout HorizontalOptions="Center" Margin="0,40,0,20" WidthRequest="320">
+            <Label 
+                x:Name="ResultText"
+                HorizontalOptions="Start"
+                Margin="0,0,10,0"
+                Text="Obtained result: "/>
+
+            <Label 
+                x:Name="ResultValue"
+                HorizontalOptions="Start"
+                Text="{Binding ResultValue}"/>
+        </HorizontalStackLayout>
+
+        <Button
+            x:Name="CalculateHydrogen"
+            Text="Calculate" 
+            SemanticProperties.Hint="Calculate hydrogen content in dry wood chips"
+            Margin="0,10,0,0"
+            Command="{Binding CalculateHydrogenCommand}"
+            HorizontalOptions="Center" />
+
+        <Button
+            x:Name="ReturnToPreviousPage"
+            Text="Back" 
+            SemanticProperties.Hint="Return"
+            Margin="0,10,0,0"
+            Command="{Binding ReturnToPreviousPageCommand}"
+            HorizontalOptions="Center" />
+
+    </VerticalStackLayout>
+</ContentPage>

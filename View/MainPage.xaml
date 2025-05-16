@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BasicCalculator.View.MainPage"
+             xmlns:viewmodel="clr-namespace:BasicCalculator.ViewModel">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="20, 20"
+            Spacing="25">
+            <Image
+                Source="lab.png"
+                WidthRequest="450"
+                HeightRequest="250"
+                Aspect="AspectFit"
+                SemanticProperties.Description="Laboratory technician's photo" />
+
+            <Label
+                Text="Determination of Chemical Elements"
+                Style="{StaticResource Headline}"
+                SemanticProperties.Description="Determination of Chemical Elements in Dry Wood Chips"
+                SemanticProperties.Hint="Chemical element determination in dry wood chips"
+                SemanticProperties.HeadingLevel="Level1" />
+
+            <Label
+                Text="Select the desired operation"
+                Style="{StaticResource SubHeadline}"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Select the desired operation"
+                SemanticProperties.Hint="Select the desired operation"/>
+
+            <Button
+                x:Name="DeterminationOfHydrogen"
+                Text="Determination of hydrogen content in dry wood chips" 
+                SemanticProperties.Hint="Determination of hydrogen content in dry wood chips"
+                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainPageViewModel}}, Path=GoToDeterminationOfHydrogenCommand}"
+                CommandParameter="{Binding .}"
+                HorizontalOptions="Fill" />
+
+            <Button
+                x:Name="DeterminationOfOxygen"
+                Text="Determination of oxygen content in dry wood chips" 
+                SemanticProperties.Hint="Determination of oxygen content in dry wood chips"
+                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainPageViewModel}}, Path=GoToDeterminationOfOxygenCommand}"
+                CommandParameter="{Binding .}"
+                HorizontalOptions="Fill" />
+
+            <Button
+                x:Name="DeterminationOfNitrogen"
+                Text="Determination of nitrogen content in dry wood chips" 
+                SemanticProperties.Hint="Determination of oxygen content in dry wood chips"
+                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainPageViewModel}}, Path=GoToDeterminationOfNitrogenCommand}"
+                CommandParameter="{Binding .}"
+                HorizontalOptions="Fill" />
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
